@@ -13,6 +13,19 @@ use Illuminate\Http\Request;
 |
 */
 
-Route::middleware('auth:api')->get('/user', function (Request $request) {
-    return $request->user();
+
+$api = app('Dingo\Api\Routing\Router');
+
+app('Dingo\Api\Exception\Handler')->register(function (Exception $exception) {
+    if ($exception instanceof TokenExpiredException) {
+        return response()->json('未登录', 401);
+    };
 });
+
+include app_path('Http/Controllers/Auth/V1/routes.php');
+include app_path('Http/Controllers/Admin/Media/V1/routes.php');
+include app_path('Http/Controllers/Admin/Common/V1/routes.php');
+include app_path('Http/Controllers/Admin/Store/V1/routes.php');
+include app_path('Http/Controllers/Admin/Marketing/V1/routes.php');
+
+

@@ -2,7 +2,6 @@
 
 namespace App\Providers;
 
-use Illuminate\Support\Facades\Event;
 use Illuminate\Foundation\Support\Providers\EventServiceProvider as ServiceProvider;
 
 class EventServiceProvider extends ServiceProvider
@@ -29,4 +28,13 @@ class EventServiceProvider extends ServiceProvider
 
         //
     }
+
+    /**
+     * 需要注册的订阅者类。
+     *
+     * @var array
+     */
+    protected $subscribe = [
+        'App\Listeners\CustomerEventSubscriber',
+    ];
 }

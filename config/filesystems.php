@@ -37,7 +37,7 @@ return [
     | may even configure multiple disks of the same driver. Defaults have
     | been setup for each driver as an example of the required options.
     |
-    | Supported Drivers: "local", "ftp", "s3", "rackspace"
+    | Supported Drivers: "local", "ftp", "sftp", "s3", "rackspace"
     |
     */
 
@@ -51,7 +51,7 @@ return [
         'public' => [
             'driver' => 'local',
             'root' => storage_path('app/public'),
-            'url' => env('APP_URL').'/storage',
+            'url' => env('APP_URL') . '/storage',
             'visibility' => 'public',
         ],
 
@@ -61,6 +61,21 @@ return [
             'secret' => env('AWS_SECRET_ACCESS_KEY'),
             'region' => env('AWS_DEFAULT_REGION'),
             'bucket' => env('AWS_BUCKET'),
+            'url' => env('AWS_URL'),
+        ],
+
+        'qiniu' => [
+            'driver' => 'qiniu',
+            'domains' => [
+                'default' => 'p8afu5a1q.bkt.clouddn.com', //你的七牛域名
+                'https' => 'dn-yourdomain.qbox.me',         //你的HTTPS域名
+                'custom' => 'static.abc.com',                //你的自定义域名
+            ],
+            'access_key' => 'PspO8OnLPwqkLlhe7nGzg304nzaw2AXsfeddKNzB',  //AccessKey
+            'secret_key' => 'Y9YtEl-KaGitMdI3_mX3HY7odu-Du8uQGRKWCY1O',  //SecretKey
+            'bucket' => 'publication',  //Bucket名字
+            'notify_url' => '',  //持久化处理回调地址
+            'url' => 'http://p8afu5a1q.bkt.clouddn.com/',  // 填写文件访问根url
         ],
 
     ],
