@@ -13,7 +13,7 @@ class GenerateToken extends Command
      *
      * @var string
      */
-    protected $signature = 'jingfree:generate-token';
+    protected $signature = 'cms:generate-token';
 
     /**
      * The console command description.

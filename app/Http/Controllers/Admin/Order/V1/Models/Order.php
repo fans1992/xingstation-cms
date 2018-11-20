@@ -4,9 +4,9 @@ namespace App\Http\Controllers\Admin\Order\V1\Models;
 
 use App\Http\Controllers\Admin\Customer\V1\Models\Customer;
 use App\Http\Controllers\Admin\Store\V1\Models\OpticalStore;
-use App\Models\FreeCartModel;
+use App\Models\PublicationModel;
 
-class Order extends FreeCartModel
+class Order extends PublicationModel
 {
     protected $table = 'order';
 

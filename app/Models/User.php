@@ -7,6 +7,10 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 
 class User extends Authenticatable implements JWTSubject
 {
+    protected $connection = 'publication';
+
+    protected $table = 'users';
+
     protected $fillables = [
         'name', 'email', 'pasword', 'remember_token'
     ];

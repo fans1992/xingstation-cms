@@ -2,9 +2,9 @@
 
 namespace App\Http\Controllers\Admin\Marketing\V1\Models;
 
-use App\Models\FreeCartModel;
+use App\Models\PublicationModel;
 
-class Marketing extends FreeCartModel
+class Marketing extends PublicationModel
 {
     protected $table = 'marketing';
 

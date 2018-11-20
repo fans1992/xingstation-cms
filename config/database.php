@@ -61,16 +61,16 @@ return [
                 'NO_ENGINE_SUBSTITUTION'
             ]
         ],
-        'freecart' => [
+        'publication' => [
             'driver' => 'mysql',
-            'host' => env('FREECART_DB_HOST', '127.0.0.1'),
-            'port' => env('FREECART_DB_PORT', '3306'),
-            'database' => env('FREECART_DB_DATABASE', 'forge'),
-            'username' => env('FREECART_DB_USERNAME', 'forge'),
-            'password' => env('FREECART_DB_PASSWORD', ''),
+            'host' => env('PUBLICATION_DB_HOST', '127.0.0.1'),
+            'port' => env('PUBLICATION_DB_PORT', '3306'),
+            'database' => env('PUBLICATION_DB_DATABASE', 'forge'),
+            'username' => env('PUBLICATION_DB_USERNAME', 'forge'),
+            'password' => env('PUBLICATION_DB_PASSWORD', ''),
             'charset' => 'utf8mb4',
             'collation' => 'utf8mb4_unicode_ci',
-            'prefix' => 'oc_',
+            'prefix' => '',
             'strict' => true,
             'engine' => null,
             'modes' => [
