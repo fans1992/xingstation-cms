@@ -14,10 +14,10 @@ class UserRequest extends FormRequest
     public function rules()
     {
         return [
-//          'name' => 'required|string|max:255',
+            'name' => 'required|string|max:255',
             'password' => 'required|string|min:6',
-            'verification_key' => 'required|string',
-            'verification_code' => 'required|string',
+//            'verification_key' => 'required|string',
+//            'verification_code' => 'required|string',
         ];
     }
 
