@@ -16,7 +16,6 @@ class AuthorizationRequest extends FormRequest
         return [
             'username' => 'required|string',
             'password' => 'required|string|min:6',
-            'optical_store_id' => 'required|integer'
         ];
     }
 }

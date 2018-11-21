@@ -15,13 +15,6 @@ $api->version('v1', [
             $api->post('password/reset', 'ResetPasswordController@reset');//修改密码
 
         });
-
-//        $api->group(['middleware' => "api.auth", 'model' => 'App\Models\Customer'], function ($api) {
-//            $api->put('authorizations/current', 'CustomerAuthorizationsController@update');// 刷新token
-//            $api->delete('authorizations/current', 'CustomerAuthorizationsController@destroy');// 删除token
-//            $api->post('password/reset', 'ResetPasswordController@reset');//修改密码
-//
-//        });
     });
 
     $api->group([
@@ -31,9 +24,6 @@ $api->version('v1', [
     ], function ($api) {
         //管理员登陆
         $api->post('authorizations', 'AuthorizationsController@store');
-
-        //用户登录
-        $api->post('customer/login', 'CustomerAuthorizationsController@store');
 
         // 短信验证码
         $api->post('verificationCodes', 'VerificationCodesController@store');
