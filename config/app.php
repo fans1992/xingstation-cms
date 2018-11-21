@@ -168,6 +168,9 @@ return [
          */
         App\Providers\EasySmsServiceProvider::class,
 
+
+        Jenssegers\Mongodb\MongodbServiceProvider::class,
+
     ],
 
     /*
