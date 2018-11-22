@@ -7,7 +7,7 @@ use Jenssegers\Mongodb\Eloquent\Model as Eloquent;
 class Material extends Eloquent
 {
     protected $connection = 'mongodb';
-    protected $collection = 'xingstation_cms';
+    protected $collection = 'materials';
 
 
     /**
