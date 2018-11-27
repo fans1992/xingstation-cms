@@ -14,6 +14,21 @@ $api->version('v1', [
             //素材列表
             $api->get('materials', 'MaterialsController@index');
 
+            //上传素材
+            $api->post('materials', 'MaterialsController@store');
+
+            //查看素材
+            $api->get('materials/{material}', 'MaterialsController@show');
+
+            //修改素材
+            $api->put('materials/{material}', 'MaterialsController@update');
+
+            //删除素材
+            $api->delete('materials/{material}', 'MaterialsController@destroy');
+
+            //我的素材
+            $api->get('users/{user}/materials', 'MaterialsController@userIndex');
+
         });
     });
 

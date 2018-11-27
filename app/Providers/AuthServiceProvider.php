@@ -2,6 +2,8 @@
 
 namespace App\Providers;
 
+use App\Http\Controllers\Material\V1\Models\Material;
+use App\Policies\MaterialPolicy;
 use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
 use App\Models\User;
 use App\Policies\UserPolicy;
@@ -16,7 +18,7 @@ class AuthServiceProvider extends ServiceProvider
      */
     protected $policies = [
         User::class => UserPolicy::class,
-        'App\Models\Model' => 'App\Policies\ModelPolicy',
+        Material::class => MaterialPolicy::class,
     ];
 
     /**
