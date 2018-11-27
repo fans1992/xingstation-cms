@@ -3,6 +3,8 @@
 namespace App\Models;
 
 use Illuminate\Foundation\Auth\User as Authenticatable;
+use App\Http\Controllers\Material\V1\Models\Material;
+use Jenssegers\Mongodb\Eloquent\HybridRelations;
 use Spatie\Permission\Models\Role;
 use Spatie\Permission\Traits\HasRoles;
 use Tymon\JWTAuth\Contracts\JWTSubject;
@@ -10,6 +12,7 @@ use Tymon\JWTAuth\Contracts\JWTSubject;
 class User extends Authenticatable implements JWTSubject
 {
     use HasRoles;
+    use HybridRelations;
 
     protected $connection = 'publication';
 
@@ -39,5 +42,11 @@ class User extends Authenticatable implements JWTSubject
     public function getSystemRoles()
     {
         return $this->isSuperAdmin() ? Role::all() : Role::where('name', '<>', 'super-admin')->get();
+    }
+
+    //素材
+    public function materials()
+    {
+        return $this->hasMany(Material::class, 'user_id', 'id');
     }
 }
