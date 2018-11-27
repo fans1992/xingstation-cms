@@ -19,6 +19,7 @@ class Material extends Moloquent
 
     public $fillable = [
         'id',
+        'category',
         'attribute',
         'type'
     ];

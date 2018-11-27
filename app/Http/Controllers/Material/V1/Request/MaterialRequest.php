@@ -13,25 +13,24 @@ class MaterialRequest extends FormRequest
 
     public function rules()
     {
-//        return [
-//            'name' => 'required|string|max:255',
-//            'password' => 'required|string|min:6',
-//        ];
+        return [
+            'category' => 'required|string|in:image,video,animation',
+            'attribute' => 'required',
+        ];
     }
 
     public function attributes()
     {
         return [
-            'verification_key' => '短信验证码 key',
-            'verification_code' => '短信验证码',
+            'category' => '素材类型',
         ];
     }
 
     public function messages()
     {
         return [
-            'verification_key.required' => '短信验证码key不能为空',
-            'verification_code.required' => '短信验证码不能为空',
+            'category.required' => '素材类型不能为空',
+            'category.in' => '素材类型有误'
         ];
     }
 
