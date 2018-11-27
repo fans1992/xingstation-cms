@@ -33,8 +33,7 @@ class MaterialsController extends Controller
         $this->authorize('own', $material);
 
         $material->update($request->all());
-
-
+        
         return $material;
     }
 
