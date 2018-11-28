@@ -26,6 +26,7 @@ include app_path('Http/Controllers/Auth/V1/routes.php');
 include app_path('Http/Controllers/User/V1/routes.php');
 include app_path('Http/Controllers/Common/V1/routes.php');
 include app_path('Http/Controllers/Material/V1/routes.php');
+include app_path('Http/Controllers/Media/V1/routes.php');
 //include app_path('Http/Controllers/Admin/Marketing/V1/routes.php');
 
 
