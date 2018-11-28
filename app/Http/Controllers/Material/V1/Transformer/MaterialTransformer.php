@@ -26,6 +26,10 @@ class MaterialTransformer extends TransformerAbstract
 
     public function includeUser(Material $material)
     {
+        if(!$material->user){
+            return null;
+        }
+
         return $this->item($material->user, new UserTransformer());
     }
 }
