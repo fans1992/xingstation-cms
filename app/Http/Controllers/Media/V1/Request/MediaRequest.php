@@ -20,7 +20,7 @@ class MediaRequest extends FormRequest
                 ];
             case 'POST':
                 $rules = [
-                    'type' => 'required|string|in:image,video',
+                    'type' => 'required|string|in:image,video,animation',
                 ];
 
                 if ($this->type == 'image') {
