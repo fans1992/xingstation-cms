@@ -13,7 +13,7 @@ return [
     |
     */
 
-    'default' => env('DB_CONNECTION', 'mysql'),
+    'default' => env('PUBLICATION_DB_CONNECTION', 'mysql'),
 
     /*
     |--------------------------------------------------------------------------
