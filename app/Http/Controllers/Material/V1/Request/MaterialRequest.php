@@ -13,10 +13,23 @@ class MaterialRequest extends FormRequest
 
     public function rules()
     {
-        return [
-            'category' => 'required|string|in:image,video,animation',
-            'attribute' => 'required',
-        ];
+        switch ($this->method()) {
+            case "GET":
+                return [
+                    'perPage' => 'required|numeric|min:1',
+                ];
+                break;
+            case 'POST':
+                return [
+                    'category' => 'required|string|in:image,video,lottie',
+                    'attribute' => 'required',
+                ];
+                break;
+            case 'PUT':
+                return [];
+                break;
+        }
+
     }
 
     public function attributes()

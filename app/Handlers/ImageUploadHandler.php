@@ -6,7 +6,7 @@ use Log;
 
 class ImageUploadHandler
 {
-    protected $allowed_ext = ["png", "jpg", "gif", 'jpeg', 'mp4'];
+    protected $allowed_ext = ["png", "jpg", "gif", 'jpeg', 'mp4', 'wmv'];
 
     public function save($file, $file_prefix)
     {

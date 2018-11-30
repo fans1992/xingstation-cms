@@ -15,9 +15,10 @@ class MaterialTransformer extends TransformerAbstract
     {
         return [
             '_id' => $material->_id,
-            'user_id' => (int)$material->user_id,
+            'user_id' => $material->user_id,
+//            'name' => $material->name,
             'category' => $material->category,
-            '﻿attribute' => $material->attribute,
+            'attribute' => $material->attribute,
             'type' => $material->type,
             'created_at' => $material->created_at->toDateTimeString(),
             'updated_at' => $material->updated_at->toDateTimeString(),

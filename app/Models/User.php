@@ -32,10 +32,21 @@ class User extends Authenticatable implements JWTSubject
         return [];
     }
 
+    public function isAuthorOf($model)
+    {
+        return $this->id == $model->user_id;
+    }
+
     //超级管理员
     public function isSuperAdmin()
     {
         return $this->hasRole('super-admin');
+    }
+
+    //普通管理员
+    public function isAdmin()
+    {
+        return $this->hasRole(['super-admin', 'admin']);
     }
 
     //系统配置 可选角色

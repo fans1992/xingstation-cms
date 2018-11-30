@@ -12,7 +12,7 @@ $api->version('v1', [
         $api->group(['middleware' => "api.auth", 'model' => 'App\Models\User'], function ($api) {
 
             //素材列表
-
+            $api->get('materials', 'MaterialsController@index');
 
             //上传素材
             $api->post('materials', 'MaterialsController@store');
@@ -31,7 +31,6 @@ $api->version('v1', [
 
         });
 
-        $api->get('materials', 'MaterialsController@index');
     });
 
 });

@@ -12,6 +12,6 @@ class MaterialPolicy
 
     public function own(User $user, Material $material)
     {
-        return $material->user_id == $user->id;
+        return $user->isAuthorOf($material) || $user->isAdmin();
     }
 }

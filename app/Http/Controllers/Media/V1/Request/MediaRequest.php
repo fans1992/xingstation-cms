@@ -20,13 +20,13 @@ class MediaRequest extends FormRequest
                 ];
             case 'POST':
                 $rules = [
-                    'type' => 'required|string|in:image,video,animation',
+                    'type' => 'required|string|in:image,video,lottie',
                 ];
 
                 if ($this->type == 'image') {
                     $rules['file'] = 'filled|mimes:jpeg,jpg,png,gif|max:10240';
                 } else if ($this->type == 'video') {
-                    $rules['file'] = 'filled|mimes:mp4|max:51200';
+                    $rules['file'] = 'filled|mimes:mp4,wmv|max:51200';
                 } else {
                     $rules['file'] = 'filled';
                 }

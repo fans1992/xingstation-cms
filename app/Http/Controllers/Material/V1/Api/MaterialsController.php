@@ -13,13 +13,19 @@ class MaterialsController extends Controller
 {
     public function index(Request $request, Material $material)
     {
+        $perPage = $request->perPage ? (int)$request->perPage: 10;
+
         $query = $material->query();
 
         if ($request->has('category')) {
             $query->where('category', $request->category);
         }
 
-        $materials = $query->orderBy('created_at', 'desc')->paginate(5);
+        if ($request->has('name')) {
+            $query->where('name', 'like', '%'.$request->name.'%');
+        }
+
+        $materials = $query->orderBy('created_at', 'desc')->paginate($perPage);
 
         return $this->response->paginator($materials, new MaterialTransformer());
     }
@@ -28,10 +34,16 @@ class MaterialsController extends Controller
     {
         $material->fill($request->all());
         $material->user_id = $this->user()->id;
+        $material->name = $material->attribute['name'];
         $material->save();
 
         return $this->response->item($material, new MaterialTransformer())
             ->setStatusCode(201);
+    }
+
+    public function show(Request $request, Material $material)
+    {
+        return $this->response->item($material, new MaterialTransformer());
     }
 
     public function update(MaterialRequest $request, Material $material)
