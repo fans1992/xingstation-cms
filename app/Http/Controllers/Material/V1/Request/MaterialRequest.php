@@ -36,6 +36,7 @@ class MaterialRequest extends FormRequest
     {
         return [
             'category' => '素材类型',
+            'attribute' => '素材属性',
         ];
     }
 
@@ -43,7 +44,8 @@ class MaterialRequest extends FormRequest
     {
         return [
             'category.required' => '素材类型不能为空',
-            'category.in' => '素材类型有误'
+            'category.in' => '素材类型有误',
+            'attribute.required' => '素材属性不能为空',
         ];
     }
 

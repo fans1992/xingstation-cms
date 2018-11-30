@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Http\Controllers\Work\V1\Models\Work;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use App\Http\Controllers\Material\V1\Models\Material;
 use Jenssegers\Mongodb\Eloquent\HybridRelations;
@@ -59,5 +60,11 @@ class User extends Authenticatable implements JWTSubject
     public function materials()
     {
         return $this->hasMany(Material::class, 'user_id', 'id');
+    }
+
+    //作品
+    public function works()
+    {
+        return $this->hasMany(Work::class, 'user_id', 'id');
     }
 }
