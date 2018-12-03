@@ -73,4 +73,18 @@ class WorksController extends Controller
 
         return $this->response->noContent();
     }
+
+    public function templetIndex(Request $request, Work $work)
+    {
+        $perPage = $request->perPage ? (int)$request->perPage: 10;
+
+        $query = $work->query();
+        $templets = $query->OrderBy('﻿created_at', 'desc')->paginate($perPage);
+
+//        $templets = $query->user()->whereHas('roles', function (){
+//
+//        });
+
+        return $this->response->paginator($templets, new WorkTransformer());
+    }
 }
