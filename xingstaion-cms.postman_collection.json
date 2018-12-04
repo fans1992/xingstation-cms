@@ -1,0 +1,818 @@
+{
+	"info": {
+		"_postman_id": "78f0ba60-cd84-4cfe-9ebb-d0cf7f9a0744",
+		"name": "xingstaion-cms",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "登陆相关",
+			"item": [
+				{
+					"name": "图片验证码",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"phone\":\"18516555396\"\n}"
+						},
+						"url": {
+							"raw": "http://{{host}}/api/captchas",
+							"protocol": "http",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"api",
+								"captchas"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "刷新token",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{jwt_user1}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "http://{{host}}/api/authorizations/current",
+							"protocol": "http",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"api",
+								"authorizations",
+								"current"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "用户登录",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"username\":\"15555555555\",\n\t\"password\":\"password\"\n}"
+						},
+						"url": {
+							"raw": "http://{{host}}/api/authorizations",
+							"protocol": "http",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"api",
+								"authorizations"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "发送短信验证码",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n   \"captcha_key\":\"captcha-PL5l4L3Up1PUpZN\",\n   \"captcha_code\":\"t6zay\"\n}"
+						},
+						"url": {
+							"raw": "http://{{host}}/api/verificationCodes",
+							"protocol": "http",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"api",
+								"verificationCodes"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "密码重置",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"verification_key\":\"verificationCode_uQZ4KXEYysbaaav\",\n\t\"verification_code\":\"1234\",\n\t\"password\":\"passw0rd\"\n}"
+						},
+						"url": {
+							"raw": "http://{{host}}/api/password/reset",
+							"protocol": "http",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"api",
+								"password",
+								"reset"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "用户中心",
+			"item": [
+				{
+					"name": "用户信息",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{jwt_user1}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "http://{{host}}/api/user?include=permissions,roles",
+							"protocol": "http",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"api",
+								"user"
+							],
+							"query": [
+								{
+									"key": "include",
+									"value": "permissions,roles"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "修改用户",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{jwt_user1}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PATCH",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"value": "{{jwt_gao}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n   \"name\":\"王翔翔11\",\n   \"phone\":\"15555555555\",\n   \"password\": \"password\"\n}"
+						},
+						"url": {
+							"raw": "http://{{host}}/api/user",
+							"protocol": "http",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"api",
+								"user"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "退出登录",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{jwt_user1}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOi8vcGFwaS5qaW5nZnJlZS50b3AvYXBpL2F1dGhvcml6YXRpb25zIiwiaWF0IjoxNTI3NTExMDYzLCJleHAiOjE1Mjc1MTgyNjMsIm5iZiI6MTUyNzUxMTA2MywianRpIjoicFE0RW5yYkxBcWRmQ2xPTCIsInN1YiI6NTEsInBydiI6IjIzYmQ1Yzg5NDlmNjAwYWRiMzllNzAxYzQwMDg3MmRiN2E1OTc2ZjcifQ.zRn2IZ8UGizY_HgzKIgMwfG9EWjjht6huEUAWos7Zq0"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "http://{{host}}/api/authorizations/current",
+							"protocol": "http",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"api",
+								"authorizations",
+								"current"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "素材",
+			"item": [
+				{
+					"name": "素材列表",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{jwt_user1}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "http://{{host}}/api/materials?page=1&perPage=10&name=图片",
+							"protocol": "http",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"api",
+								"materials"
+							],
+							"query": [
+								{
+									"key": "page",
+									"value": "1"
+								},
+								{
+									"key": "include",
+									"value": "user",
+									"disabled": true
+								},
+								{
+									"key": "category",
+									"value": "image",
+									"disabled": true
+								},
+								{
+									"key": "perPage",
+									"value": "10"
+								},
+								{
+									"key": "name",
+									"value": "图片"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "新增素材",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{jwt_user1}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "        {\n            \"id\": 2, \n            \"category\":\"lottie\",\n            \"attribute\": {\n                \"name\": \"测试图片\", \n                \"height\": 100, \n                \"width\": 100, \n                \"x\": 0, \n                \"y\": 0, \n                \"imgUrl\": \"https://dn-coding-net-production-static.qbox.me/d4c0b468-29dd-4996-ae65-58a4b038fc39.JPG?imageMogr2/auto-orient/format/jpeg/crop/!538x538a0a0\", \n                \"link\": \"\", \n                \"opacity\": 1, \n                \"type\": \"IMG_MODULE\", \n                \"borderWidth\": 0, \n                \"background\": \"#fff\", \n                \"borderColor\": \"#000\", \n                \"borderStyle\": \"solid\", \n                \"borderRadius\": 0, \n                \"animationName\": \"none\", \n                \"animationDuration\": 1, \n                \"animationDelay\": 0, \n                \"animationIterationCount\": 1\n            }\n        }"
+						},
+						"url": {
+							"raw": "http://{{host}}/api/materials",
+							"protocol": "http",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"api",
+								"materials"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "素材详情",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{jwt_user1}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "http://{{host}}/api/materials/:_id?",
+							"protocol": "http",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"api",
+								"materials",
+								":_id"
+							],
+							"query": [
+								{
+									"key": "page",
+									"value": "1",
+									"disabled": true
+								}
+							],
+							"variable": [
+								{
+									"key": "_id",
+									"value": ""
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "修改素材",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{jwt_user1}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"_id\" : ObjectId(\"5c00271d5c5e1200080f7178\"),\n    \"id\" : 2,\n    \"category\" : \"image\",\n    \"name\" : \"图片2\",\n    \"height\" : 100,\n    \"width\" : 100,\n    \"x\" : 0,\n    \"y\" : 0,\n    \"imgUrl\" : \"https://dn-coding-net-production-static.qbox.me/d4c0b468-29dd-4996-ae65-58a4b038fc39.JPG?imageMogr2/auto-orient/format/jpeg/crop/!538x538a0a0\",\n    \"link\" : null,\n    \"opacity\" : 1,\n    \"type\" : \"IMG_MODULE\",\n    \"borderWidth\" : 0,\n    \"background\" : \"#fff\",\n    \"borderColor\" : \"#000\",\n    \"borderStyle\" : \"solid\",\n    \"borderRadius\" : 0,\n    \"animationName\" : \"none\",\n    \"animationDuration\" : 1,\n    \"animationDelay\" : 0,\n    \"animationIterationCount\" : 1,\n    \"user_id\" : 61,\n    \"updated_at\" : ISODate(\"2018-11-29T17:51:25.000Z\"),\n    \"created_at\" : ISODate(\"2018-11-29T17:51:25.000Z\")\n}"
+						},
+						"url": {
+							"raw": "http://{{host}}/api/materials/:_id",
+							"protocol": "http",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"api",
+								"materials",
+								":_id"
+							],
+							"variable": [
+								{
+									"key": "_id",
+									"value": ""
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "删除素材",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{jwt_user1}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "http://{{host}}/api/materials/:_id",
+							"protocol": "http",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"api",
+								"materials",
+								":_id"
+							],
+							"variable": [
+								{
+									"key": "_id",
+									"value": ""
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "附件上传",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "afc86a13-ff35-4404-a21b-c3b17646390e",
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{jwt_user1}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "type",
+									"value": "image",
+									"type": "text"
+								},
+								{
+									"key": "file",
+									"type": "file",
+									"src": ""
+								}
+							]
+						},
+						"url": {
+							"raw": "http://{{host}}/api/media",
+							"protocol": "http",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"api",
+								"media"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "作品管理",
+			"item": [
+				{
+					"name": "作品发布",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{jwt_user1}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"status\": {\n    \"page\": {\n      \"order\": [\n        0,\n        1\n      ],\n      \"current\": 0\n    },\n    \"com\": {\n      \"current\": 8\n    },\n    \"project\": {\n      \"desc\": \"\",\n      \"title\": \"示例标题3\",\n      \"coverUrl\":\"http://www.cover.com\",\n      \"name\": \"\"\n    },\n    \"shouldSettingsShow\": false,\n    \"workSettings\": {\n      \"status\": false,\n      \"payload\": {\n        \"author\": \"\",\n        \"name\": \"\",\n        \"desc\": \"\"\n      }\n    }\n  },\n  \"comList\": [\n    {\n      \"id\": 2,\n      \"attribute\": {\n        \"name\": \"图片2\",\n        \"height\": 241,\n        \"width\": 320,\n        \"x\": 31,\n        \"y\": 6,\n        \"imgUrl\": \"https://dn-coding-net-production-static.qbox.me/d4c0b468-29dd-4996-ae65-58a4b038fc39.JPG?imageMogr2/auto-orient/format/jpeg/crop/!538x538a0a0\",\n        \"link\": \"\",\n        \"opacity\": 1,\n        \"type\": \"IMG_MODULE\",\n        \"borderWidth\": 0,\n        \"background\": \"#fff\",\n        \"borderColor\": \"#000\",\n        \"borderStyle\": \"solid\",\n        \"borderRadius\": 0,\n        \"animationName\": \"pulse\",\n        \"animationDuration\": 1,\n        \"animationDelay\": 0,\n        \"animationIterationCount\": 1\n      },\n      \"type\": \"UPDATE_COM\"\n    },\n    {\n      \"id\": 3,\n      \"attribute\": {\n        \"name\": \"输入框3\",\n        \"content\": \"输入框\",\n        \"height\": 40,\n        \"width\": 300,\n        \"x\": 43,\n        \"y\": 256,\n        \"color\": \"#000\",\n        \"imgUrl\": \"\",\n        \"opacity\": 1,\n        \"type\": \"INPUT_MODULE\",\n        \"borderWidth\": 0,\n        \"background\": \"#fff\",\n        \"borderColor\": \"#000\",\n        \"borderStyle\": \"solid\",\n        \"borderRadius\": 0,\n        \"animationName\": \"none\",\n        \"animationDuration\": 1,\n        \"animationDelay\": 0,\n        \"animationIterationCount\": 1\n      },\n      \"type\": \"UPDATE_COM\"\n    },\n    {\n      \"id\": 7,\n      \"attribute\": {\n        \"name\": \"图片7\",\n        \"height\": 60,\n        \"width\": 175,\n        \"x\": 105,\n        \"y\": 592,\n        \"imgUrl\": \"\",\n        \"link\": \"\",\n        \"opacity\": 0.9,\n        \"type\": \"IMG_MODULE\",\n        \"borderWidth\": 0,\n        \"background\": \"#9b9b9b\",\n        \"borderColor\": \"#000\",\n        \"borderStyle\": \"solid\",\n        \"borderRadius\": 0,\n        \"animationName\": \"none\",\n        \"animationDuration\": 1,\n        \"animationDelay\": 0,\n        \"animationIterationCount\": 1\n      },\n      \"type\": \"UPDATE_COM\"\n    },\n    {\n      \"id\": 8,\n      \"attribute\": {\n        \"name\": \"视频8\",\n        \"videoUrl\": \"http://h5-images.oss-cn-shanghai.aliyuncs.com/xingshidu_h5/marketing/pages/ad/vedio.mp4\",\n        \"height\": 200,\n        \"width\": 300,\n        \"x\": 40,\n        \"y\": 318,\n        \"type\": \"VIDEO_MODULE\",\n        \"borderWidth\": 0,\n        \"background\": \"none\",\n        \"borderColor\": \"#000\",\n        \"borderStyle\": \"solid\",\n        \"borderRadius\": 0,\n        \"animationName\": \"none\",\n        \"animationDuration\": 1,\n        \"animationDelay\": 0,\n        \"animationIterationCount\": 1\n      },\n      \"type\": \"UPDATE_COM\"\n    }\n  ],\n  \"pageList\": [\n    {\n      \"id\": 0,\n      \"order\": [\n        2,\n        3,\n        7,\n        8\n      ],\n      \"settings\": {\n        \"visible\": false,\n        \"payload\": {\n          \"name\": \"页面-0\"\n        }\n      }\n    },\n    {\n      \"id\": 1,\n      \"order\": [],\n      \"settings\": {\n        \"visible\": false,\n        \"payload\": {\n          \"name\": \"页面-1\",\n          \"isLongPage\": false,\n          \"width\": 375,\n          \"height\": 667\n        }\n      }\n    }\n  ]\n}"
+						},
+						"url": {
+							"raw": "http://{{host}}/api/works",
+							"protocol": "http",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"api",
+								"works"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "查看作品",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{jwt_user1}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "http://{{host}}/api/works/5c040fcf3356aa000851592f?workPage=1",
+							"protocol": "http",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"api",
+								"works",
+								"5c040fcf3356aa000851592f"
+							],
+							"query": [
+								{
+									"key": "workPage",
+									"value": "1"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "删除作品",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{jwt_user1}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "http://{{host}}/api/works/5c03d6c03356aa00094772cb",
+							"protocol": "http",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"api",
+								"works",
+								"5c03d6c03356aa00094772cb"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "修改作品",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{jwt_user1}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"_id\" : \"5c0402713356aa00094772cd\",\n    \"status\" : {\n        \"page\" : {\n            \"order\" : [ \n                0, \n                1\n            ],\n            \"current\" : 0\n        },\n        \"com\" : {\n            \"current\" : 8\n        },\n        \"project\" : {\n            \"desc\" : \"1\",\n            \"title\" : \"3\",\n            \"name\" : \"示例\"\n        },\n        \"shouldSettingsShow\" : false,\n        \"workSettings\" : {\n            \"status\" : false,\n            \"payload\" : {\n                \"author\" : \"张三\",\n                \"name\" : \"abc\",\n                \"desc\" : \"ddd\"\n            }\n        }\n    },\n    \"comList\" : [ \n        {\n            \"id\" : 2,\n            \"attribute\" : {\n                \"name\" : \"视频2\",\n                \"height\" : 241,\n                \"width\" : 320,\n                \"x\" : 31,\n                \"y\" : 6,\n                \"imgUrl\" : \"https://dn-coding-net-production-static.qbox.me/d4c0b468-29dd-4996-ae65-58a4b038fc39.JPG?imageMogr2/auto-orient/format/jpeg/crop/!538x538a0a0\",\n                \"link\" : null,\n                \"opacity\" : 1,\n                \"type\" : \"IMG_MODULE\",\n                \"borderWidth\" : 0,\n                \"background\" : \"#fff\",\n                \"borderColor\" : \"#000\",\n                \"borderStyle\" : \"solid\",\n                \"borderRadius\" : 0,\n                \"animationName\" : \"pulse\",\n                \"animationDuration\" : 1,\n                \"animationDelay\" : 0,\n                \"animationIterationCount\" : 1\n            },\n            \"type\" : \"UPDATE_COM\"\n        }, \n        {\n            \"id\" : 3,\n            \"attribute\" : {\n                \"name\" : \"输入框3\",\n                \"content\" : \"输入框\",\n                \"height\" : 40,\n                \"width\" : 300,\n                \"x\" : 43,\n                \"y\" : 256,\n                \"color\" : \"#000\",\n                \"imgUrl\" : null,\n                \"opacity\" : 1,\n                \"type\" : \"INPUT_MODULE\",\n                \"borderWidth\" : 0,\n                \"background\" : \"#fff\",\n                \"borderColor\" : \"#000\",\n                \"borderStyle\" : \"solid\",\n                \"borderRadius\" : 0,\n                \"animationName\" : \"none\",\n                \"animationDuration\" : 1,\n                \"animationDelay\" : 0,\n                \"animationIterationCount\" : 1\n            },\n            \"type\" : \"UPDATE_COM\"\n        }, \n        {\n            \"id\" : 7,\n            \"attribute\" : {\n                \"name\" : \"图片7\",\n                \"height\" : 60,\n                \"width\" : 175,\n                \"x\" : 105,\n                \"y\" : 592,\n                \"imgUrl\" : null,\n                \"link\" : null,\n                \"opacity\" : 0.9,\n                \"type\" : \"IMG_MODULE\",\n                \"borderWidth\" : 0,\n                \"background\" : \"#9b9b9b\",\n                \"borderColor\" : \"#000\",\n                \"borderStyle\" : \"solid\",\n                \"borderRadius\" : 0,\n                \"animationName\" : \"none\",\n                \"animationDuration\" : 1,\n                \"animationDelay\" : 0,\n                \"animationIterationCount\" : 1\n            },\n            \"type\" : \"UPDATE_COM\"\n        }, \n        {\n            \"id\" : 8,\n            \"attribute\" : {\n                \"name\" : \"视频8\",\n                \"videoUrl\" : \"http://h5-images.oss-cn-shanghai.aliyuncs.com/xingshidu_h5/marketing/pages/ad/vedio.mp4\",\n                \"height\" : 200,\n                \"width\" : 300,\n                \"x\" : 40,\n                \"y\" : 318,\n                \"type\" : \"VIDEO_MODULE\",\n                \"borderWidth\" : 0,\n                \"background\" : \"none\",\n                \"borderColor\" : \"#000\",\n                \"borderStyle\" : \"solid\",\n                \"borderRadius\" : 0,\n                \"animationName\" : \"none\",\n                \"animationDuration\" : 1,\n                \"animationDelay\" : 0,\n                \"animationIterationCount\" : 1\n            },\n            \"type\" : \"UPDATE_COM\"\n        }\n    ],\n    \"pageList\" : [ \n        {\n            \"id\" : 0,\n            \"order\" : [ \n                2, \n                3, \n                7, \n                8\n            ],\n            \"settings\" : {\n                \"visible\" : false,\n                \"payload\" : {\n                    \"name\" : \"页面-0\"\n                }\n            }\n        }, \n        {\n            \"id\" : 1,\n            \"order\" : [],\n            \"settings\" : {\n                \"visible\" : false,\n                \"payload\" : {\n                    \"name\" : \"页面-1\",\n                    \"isLongPage\" : false,\n                    \"width\" : 375,\n                    \"height\" : 667\n                }\n            }\n        }\n    ],\n    \"user_id\" : 61,\n    \"updated_at\" : \"2018-12-03 00:04:01\",\n    \"created_at\" : \"2018-12-03 00:04:01\"\n}"
+						},
+						"url": {
+							"raw": "http://{{host}}/api/works/5c0402713356aa00094772cd",
+							"protocol": "http",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"api",
+								"works",
+								"5c0402713356aa00094772cd"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "作品列表",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{jwt_user1}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "http://{{host}}/api/works?perPage=5",
+							"protocol": "http",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"api",
+								"works"
+							],
+							"query": [
+								{
+									"key": "page",
+									"value": "1",
+									"disabled": true
+								},
+								{
+									"key": "include",
+									"value": "user",
+									"disabled": true
+								},
+								{
+									"key": "perPage",
+									"value": "5"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}

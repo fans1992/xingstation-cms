@@ -6,13 +6,19 @@ use App\Http\Controllers\Work\V1\Models\Work;
 use App\Http\Controllers\Work\V1\Request\WorkRequest;
 use App\Http\Controllers\Controller;
 use App\Http\Controllers\Work\V1\Transformer\WorkTransformer;
+use function foo\func;
 use Illuminate\Http\Request;
 
 class WorksController extends Controller
 {
-    public function index(Request $request)
+    public function index(Request $request, Work $work)
     {
-        //
+        $perPage = $request->perPage ? (int)$request->perPage: 10;
+
+        $query = $work->query();
+        $works = $query->OrderBy('﻿created_at', 'desc')->paginate($perPage);
+
+        return $this->response->paginator($works, new WorkTransformer());
     }
 
     public function store(WorkRequest $request, Work $work)
@@ -21,11 +27,64 @@ class WorksController extends Controller
         $work->user_id = $this->user()->id;
         $work->save();
 
-        return $this->response->item($work, new WorkTransformer())->setStatusCode(201);
+        return $this->response->array($work->toArray())->setStatusCode(201);
+    }
+
+    public function update(WorkRequest $request, Work $work)
+    {
+        $this->authorize('own', $work);
+        $work->update($request->all());
+
+        return $work;
     }
 
     public function show(Request $request, Work $work)
     {
-        return $this->response->item($work, new WorkTransformer());
+        if ($request->has('workPage')) {
+            $pageId = $request->workPage;
+
+            $workInfo = $work->toArray();
+
+            //获取页面组件ids
+            foreach ($workInfo['pageList'] as $k => $v) {
+                if ($v['id'] == $pageId) {
+                    $orderIds = $v['order'];
+                } else {
+                    unset($workInfo['pageList'][$k]);
+                }
+            }
+
+            //根据ids筛选组件
+            foreach($workInfo['comList'] as $key => $item) {
+                if (!in_array($item['id'], $orderIds)) {
+                    unset($workInfo['comList'][$key]);
+                }
+            }
+
+        }
+
+        return $this->response->array($workInfo, new WorkTransformer());
+    }
+
+    public function destroy(Work $work)
+    {
+        $this->authorize('own', $work);
+        $work->delete();
+
+        return $this->response->noContent();
+    }
+
+    public function templetIndex(Request $request, Work $work)
+    {
+        $perPage = $request->perPage ? (int)$request->perPage: 10;
+
+        $query = $work->query();
+        $templets = $query->OrderBy('﻿created_at', 'desc')->paginate($perPage);
+
+//        $templets = $query->user()->whereHas('roles', function (){
+//
+//        });
+
+        return $this->response->paginator($templets, new WorkTransformer());
     }
 }

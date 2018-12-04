@@ -26,6 +26,9 @@ $api->version('v1', [
             //删除作品
             $api->delete('works/{work}', 'WorksController@destroy');
 
+            //模板列表
+            $api->get('templets/works', 'WorksController@templetIndex');
+
         });
 
     });

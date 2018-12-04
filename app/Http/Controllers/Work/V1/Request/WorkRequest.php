@@ -24,18 +24,15 @@ class WorkRequest extends FormRequest
     public function attributes()
     {
         return [
-//            'status' => '作品状态',
-//            'comList' => '组件列表',
-//            'pageList' => '页面列表',
+            'status' => '作品状态',
+            'comList' => '组件列表',
+            'pageList' => '页面列表',
         ];
     }
 
     public function messages()
     {
-        return [
-            'status.required' => '素材类型不能为空',
-            'category.in' => '素材类型有误'
-        ];
+        return [];
     }
 
 }
