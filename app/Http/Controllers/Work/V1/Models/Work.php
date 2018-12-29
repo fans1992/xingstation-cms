@@ -1,15 +1,15 @@
 <?php
 
-namespace App\Http\Controllers\Material\V1\Models;
+namespace App\Http\Controllers\Work\V1\Models;
 
 use App\Models\User;
 use Moloquent;
 
-class Material extends Moloquent
+class Work extends Moloquent
 {
     protected $connection = 'mongodb';
 
-    protected $collection = 'materials';
+    protected $collection = 'works';
 
     protected $primaryKey = '_id';
 
@@ -18,10 +18,9 @@ class Material extends Moloquent
     ];
 
     public $fillable = [
-        'id',
-        'category',
-        'attribute',
-        'type'
+        'status',
+        'comList',
+        'pageList',
     ];
 
 //    protected $guarded = ['_id'];

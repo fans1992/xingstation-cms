@@ -30,6 +30,7 @@ $api->version('v1', [
             $api->get('users/{user}/materials', 'MaterialsController@userIndex');
 
         });
+
     });
 
 });

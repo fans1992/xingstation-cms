@@ -1,7 +1,7 @@
 {
     "_readme": [
         "This file locks the dependencies of your project to a known state",
-        "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
+        "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
     "content-hash": "a4e975e18979f81cf15a0104321bfe0c",
@@ -2381,16 +2381,16 @@
         },
         {
             "name": "jenssegers/mongodb",
-            "version": "v3.4.3",
+            "version": "v3.4.4",
             "source": {
                 "type": "git",
                 "url": "https://github.com/jenssegers/laravel-mongodb.git",
-                "reference": "bc78c7575b879351eedc4a57b5ac0410ee765b51"
+                "reference": "b69ef215a271bdf0c3cbbbdfbf3a940e50b7dc9c"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/jenssegers/laravel-mongodb/zipball/bc78c7575b879351eedc4a57b5ac0410ee765b51",
-                "reference": "bc78c7575b879351eedc4a57b5ac0410ee765b51",
+                "url": "https://api.github.com/repos/jenssegers/laravel-mongodb/zipball/b69ef215a271bdf0c3cbbbdfbf3a940e50b7dc9c",
+                "reference": "b69ef215a271bdf0c3cbbbdfbf3a940e50b7dc9c",
                 "shasum": "",
                 "mirrors": [
                     {
@@ -2452,7 +2452,7 @@
                 "mongo",
                 "mongodb"
             ],
-            "time": "2018-08-16T10:58:55+00:00"
+            "time": "2018-11-27T08:00:21+00:00"
         },
         {
             "name": "justinrainbow/json-schema",
@@ -4041,16 +4041,16 @@
         },
         {
             "name": "overtrue/wechat",
-            "version": "4.1.12",
+            "version": "4.1.15",
             "source": {
                 "type": "git",
                 "url": "https://github.com/overtrue/wechat.git",
-                "reference": "9594265a70d9a2f4df6177d0bd5214016cd75b69"
+                "reference": "438057687bfd47d75413c7df32a698c72be751c1"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/overtrue/wechat/zipball/9594265a70d9a2f4df6177d0bd5214016cd75b69",
-                "reference": "9594265a70d9a2f4df6177d0bd5214016cd75b69",
+                "url": "https://api.github.com/repos/overtrue/wechat/zipball/438057687bfd47d75413c7df32a698c72be751c1",
+                "reference": "438057687bfd47d75413c7df32a698c72be751c1",
                 "shasum": "",
                 "mirrors": [
                     {
@@ -4106,7 +4106,7 @@
                 "weixin",
                 "weixin-sdk"
             ],
-            "time": "2018-11-25T06:10:51+00:00"
+            "time": "2018-11-28T08:07:26+00:00"
         },
         {
             "name": "paragonie/random_compat",
@@ -7045,16 +7045,16 @@
         },
         {
             "name": "yansongda/pay",
-            "version": "v2.5.7",
+            "version": "v2.5.8",
             "source": {
                 "type": "git",
                 "url": "https://github.com/yansongda/pay.git",
-                "reference": "c3ded381b87834852b4002a8c506a6fde0d3222d"
+                "reference": "abaf48b6b742f66fcc187cde5d2d1152ea7c1d08"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/yansongda/pay/zipball/c3ded381b87834852b4002a8c506a6fde0d3222d",
-                "reference": "c3ded381b87834852b4002a8c506a6fde0d3222d",
+                "url": "https://api.github.com/repos/yansongda/pay/zipball/abaf48b6b742f66fcc187cde5d2d1152ea7c1d08",
+                "reference": "abaf48b6b742f66fcc187cde5d2d1152ea7c1d08",
                 "shasum": "",
                 "mirrors": [
                     {
@@ -7097,7 +7097,7 @@
                 "pay",
                 "wechat"
             ],
-            "time": "2018-11-12T13:49:31+00:00"
+            "time": "2018-11-27T12:21:05+00:00"
         },
         {
             "name": "yansongda/supports",
