@@ -13,12 +13,7 @@ $api->version('v1', [
 
         $api->group(['middleware' => "api.auth", 'model' => 'App\Models\User'], function ($api) {
 
-            //消息通知
-//            $api->get('customer/notifications', 'NotificationsController@index');
-//            $api->get('customer/notifications/stats', 'NotificationsController@stats');
-//            $api->patch('customer/read/notifications', 'NotificationsController@read');
-//            $api->get('customer/activities', 'ActivityLogController@index');
-
+            $api->get('qiniu_oauth', 'QiniuController@oauth');
 
         });
     });

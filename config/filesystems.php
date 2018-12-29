@@ -67,15 +67,29 @@ return [
         'qiniu' => [
             'driver' => 'qiniu',
             'domains' => [
-                'default' => 'p8afu5a1q.bkt.clouddn.com', //你的七牛域名
+                'default' => 'qiniucdn.xingstation.com', //你的七牛域名
                 'https' => 'dn-yourdomain.qbox.me',         //你的HTTPS域名
                 'custom' => 'static.abc.com',                //你的自定义域名
             ],
-            'access_key' => 'PspO8OnLPwqkLlhe7nGzg304nzaw2AXsfeddKNzB',  //AccessKey
-            'secret_key' => 'Y9YtEl-KaGitMdI3_mX3HY7odu-Du8uQGRKWCY1O',  //SecretKey
+            'access_key' => 'QwzBG0rrX-sFVvFft2A2vhqNVAnM1Nrg8PGf3VX4',  //AccessKey
+            'secret_key' => '95j_UlL2_PrSYw2q-5Z2R8e29B3V39PXIFZ5IEcf',  //SecretKey
             'bucket' => 'publication',  //Bucket名字
             'notify_url' => '',  //持久化处理回调地址
-            'url' => 'http://p8afu5a1q.bkt.clouddn.com/',  // 填写文件访问根url
+            'url' => 'http://qiniucdn.xingstation.com/',  // 填写文件访问根url
+        ],
+
+        'qiniu_bw' => [
+            'driver' => 'qiniu',
+            'domains' => [
+                'default' => 'cdn.exe666.com', //你的七牛域名
+                'https' => '',         //你的HTTPS域名
+                'custom' => '',                //你的自定义域名
+            ],
+            'access_key' => 'nC8VTjw612h_bLnKrZW-B1o3ZvN7CTOPPnmGuYMp',  //AccessKey
+            'secret_key' => 'XDAkO7Gj-JORvuKelsbEF9IZXzYgCTbdWbuBtcah',  //SecretKey
+            'bucket' => 'exe666',  //Bucket名字
+            'notify_url' => '',  //持久化处理回调地址
+            'url' => 'http://cdn.exe666.com',  // 填写文件访问根url
         ],
 
     ],
