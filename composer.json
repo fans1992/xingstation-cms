@@ -9,7 +9,7 @@
     "type": "project",
     "require": {
         "php": "^7.1.3",
-        "barryvdh/laravel-cors": "^0.11.0",
+        "barryvdh/laravel-cors": "^0.11.3",
         "barryvdh/laravel-ide-helper": "^2.4",
         "baum/baum": "^1.1",
         "dingo/api": "2.0.0-alpha2",
