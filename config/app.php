@@ -167,8 +167,7 @@ return [
          * 第三方provider
          */
         App\Providers\EasySmsServiceProvider::class,
-
-
+        Barryvdh\Cors\ServiceProvider::class,
         Jenssegers\Mongodb\MongodbServiceProvider::class,
 
     ],
