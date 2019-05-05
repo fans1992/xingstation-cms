@@ -15,7 +15,7 @@ class WorkTransformer extends TransformerAbstract
     {
         return [
             '_id' => $work->_id,
-            'user_id' => $work->user_id,
+//            'user_id' => $work->user_id,
             'title' => $work->status['project']['title'],
             'coverUrl' => $work->status['project']['coverUrl'],
 //            'name' => $work->name,

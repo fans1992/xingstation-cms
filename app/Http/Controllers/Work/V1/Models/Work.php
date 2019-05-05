@@ -18,9 +18,9 @@ class Work extends Moloquent
     ];
 
     public $fillable = [
-        'status',
-        'comList',
-        'pageList',
+        'coms',
+        'pages',
+        'settings',
     ];
 
 //    protected $guarded = ['_id'];

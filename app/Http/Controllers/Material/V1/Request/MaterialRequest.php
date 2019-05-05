@@ -21,8 +21,8 @@ class MaterialRequest extends FormRequest
                 break;
             case 'POST':
                 return [
-                    'category' => 'required|string|in:image,video,lottie',
-                    'attribute' => 'required',
+                    'type' => 'required|string|in:IMAGE,LOTTIE,VIDEO,AUDIO',
+                    'name' => 'required|string',
                 ];
                 break;
             case 'PUT':
@@ -35,17 +35,17 @@ class MaterialRequest extends FormRequest
     public function attributes()
     {
         return [
-            'category' => '素材类型',
-            'attribute' => '素材属性',
+            'type' => '素材类型',
+            'name' => '素材名称',
         ];
     }
 
     public function messages()
     {
         return [
-            'category.required' => '素材类型不能为空',
-            'category.in' => '素材类型有误',
-            'attribute.required' => '素材属性不能为空',
+            'type.required' => '素材类型不能为空',
+            'type.in' => '素材类型有误',
+            'name.required' => '素材名称不能为空',
         ];
     }
 

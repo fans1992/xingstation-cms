@@ -34,7 +34,6 @@ class MaterialsController extends Controller
     {
         $material->fill($request->all());
         $material->user_id = $this->user()->id;
-        $material->name = $material->attribute['name'];
         $material->save();
 
         return $this->response->item($material, new MaterialTransformer())
