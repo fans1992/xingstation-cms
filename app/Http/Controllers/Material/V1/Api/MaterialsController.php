@@ -17,8 +17,8 @@ class MaterialsController extends Controller
 
         $query = $material->query();
 
-        if ($request->has('category')) {
-            $query->where('category', $request->category);
+        if ($request->has('type')) {
+            $query->where('type', $request->get('type'));
         }
 
         if ($request->has('name')) {
