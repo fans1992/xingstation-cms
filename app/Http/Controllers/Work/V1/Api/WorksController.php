@@ -16,7 +16,7 @@ class WorksController extends Controller
         $perPage = $request->perPage ? (int)$request->perPage: 10;
 
         $query = $work->query();
-        $works = $query->OrderBy('﻿created_at', 'desc')->paginate($perPage);
+        $works = $query->OrderByDesc('﻿created_at')->paginate($perPage);
 
         return $this->response->paginator($works, new WorkTransformer());
     }
@@ -46,18 +46,18 @@ class WorksController extends Controller
             $workInfo = $work->toArray();
 
             //获取页面组件ids
-            foreach ($workInfo['pageList'] as $k => $v) {
+            foreach ($workInfo['pages'] as $k => $v) {
                 if ($v['id'] == $pageId) {
                     $orderIds = $v['order'];
                 } else {
-                    unset($workInfo['pageList'][$k]);
+                    unset($workInfo['pages'][$k]);
                 }
             }
 
             //根据ids筛选组件
-            foreach($workInfo['comList'] as $key => $item) {
+            foreach($workInfo['coms'] as $key => $item) {
                 if (!in_array($item['id'], $orderIds)) {
-                    unset($workInfo['comList'][$key]);
+                    unset($workInfo['coms'][$key]);
                 }
             }
 
@@ -79,7 +79,7 @@ class WorksController extends Controller
         $perPage = $request->perPage ? (int)$request->perPage: 10;
 
         $query = $work->query();
-        $templets = $query->OrderBy('﻿created_at', 'desc')->paginate($perPage);
+        $templets = $query->OrderByDesc('﻿created_at')->paginate($perPage);
 
 //        $templets = $query->user()->whereHas('roles', function (){
 //

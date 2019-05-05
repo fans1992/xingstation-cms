@@ -14,9 +14,9 @@ class WorkRequest extends FormRequest
     public function rules()
     {
         return [
-            'status' => 'required',
-            'comList' => 'required',
-            'pageList' => 'required',
+            'settings.title' => 'required|string',
+//            'comList' => 'required',
+//            'pageList' => 'required',
         ];
 
     }
@@ -24,9 +24,9 @@ class WorkRequest extends FormRequest
     public function attributes()
     {
         return [
-            'status' => '作品状态',
-            'comList' => '组件列表',
-            'pageList' => '页面列表',
+            'title' => '作品名称',
+//            'comList' => '组件列表',
+//            'pageList' => '页面列表',
         ];
     }
 
