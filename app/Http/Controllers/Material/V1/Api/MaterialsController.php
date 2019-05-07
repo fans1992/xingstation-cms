@@ -37,7 +37,7 @@ class MaterialsController extends Controller
         return response()->json($material, 201);
     }
 
-    public function show(Material $material)
+    public function show(Material $material): Material
     {
         $material->setAttribute('user', $material->user);
         return $material;
@@ -47,10 +47,10 @@ class MaterialsController extends Controller
      * 更新素材
      * @param MaterialRequest $request
      * @param Material $material
-     * @return \Dingo\Api\Http\Response
+     * @return Material
      * @throws \Illuminate\Auth\Access\AuthorizationException
      */
-    public function update(MaterialRequest $request, Material $material)
+    public function update(MaterialRequest $request, Material $material): Material
     {
         $this->authorize('own', $material);
         $material->update($request->all());
@@ -64,7 +64,7 @@ class MaterialsController extends Controller
      * @return \Dingo\Api\Http\Response
      * @throws \Illuminate\Auth\Access\AuthorizationException
      */
-    public function destroy(Material $material)
+    public function destroy(Material $material): \Dingo\Api\Http\Response
     {
         $this->authorize('own', $material);
         $material->delete();

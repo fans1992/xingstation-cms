@@ -45,30 +45,31 @@ class WorksController extends Controller
 
     public function show(Request $request, Work $work)
     {
+        $work->setAttribute('user', $work->user);
+
         if ($request->has('workPage')) {
             $pageId = $request->get('workPage');
 
-            $workInfo = $work->toArray();
+            $work = $work->toArray();
 
             //获取页面组件ids
-            foreach ($workInfo['pages'] as $k => $v) {
+            foreach ($work['pages'] as $k => $v) {
                 if ($v['id'] == $pageId) {
                     $orderIds = $v['order'];
                 } else {
-                    unset($workInfo['pages'][$k]);
+                    unset($work['pages'][$k]);
                 }
             }
 
             //根据ids筛选组件
-            foreach ($workInfo['coms'] as $key => $item) {
+            foreach ($work['coms'] as $key => $item) {
                 if (!in_array($item['id'], $orderIds)) {
-                    unset($workInfo['coms'][$key]);
+                    unset($work['coms'][$key]);
                 }
             }
-
         }
 
-        return response()->json($workInfo);
+        return response()->json($work);
     }
 
     /**
