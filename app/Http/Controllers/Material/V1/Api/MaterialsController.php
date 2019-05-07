@@ -13,7 +13,7 @@ class MaterialsController extends Controller
 {
     public function index(Request $request, Material $material)
     {
-        $perPage = $request->perPage ? (int)$request->perPage: 10;
+        $perPage = $request->get('perPage') ? (int)$request->get('perPage') : 10;
 
         $query = $material->query();
 
@@ -22,12 +22,10 @@ class MaterialsController extends Controller
         }
 
         if ($request->has('name')) {
-            $query->where('name', 'like', '%'.$request->name.'%');
+            $query->where('name', 'like', '%' . $request->name . '%');
         }
 
-        $materials = $query->orderBy('created_at', 'desc')->paginate($perPage);
-
-        return $this->response->paginator($materials, new MaterialTransformer());
+        return $query->orderBy('created_at', 'desc')->paginate($perPage);
     }
 
     public function store(MaterialRequest $request, Material $material)
@@ -36,23 +34,36 @@ class MaterialsController extends Controller
         $material->user_id = $this->user()->id;
         $material->save();
 
-        return $this->response->item($material, new MaterialTransformer())
-            ->setStatusCode(201);
+        return response()->json($material, 201);
     }
 
-    public function show(Request $request, Material $material)
+    public function show(Material $material)
     {
-        return $this->response->item($material, new MaterialTransformer());
+        $material->setAttribute('user', $material->user);
+        return $material;
     }
 
+    /**
+     * 更新素材
+     * @param MaterialRequest $request
+     * @param Material $material
+     * @return \Dingo\Api\Http\Response
+     * @throws \Illuminate\Auth\Access\AuthorizationException
+     */
     public function update(MaterialRequest $request, Material $material)
     {
         $this->authorize('own', $material);
         $material->update($request->all());
 
-        return $this->response->item($material, new MaterialTransformer());
+        return $material;
     }
 
+    /**
+     * 删除素材
+     * @param Material $material
+     * @return \Dingo\Api\Http\Response
+     * @throws \Illuminate\Auth\Access\AuthorizationException
+     */
     public function destroy(Material $material)
     {
         $this->authorize('own', $material);
