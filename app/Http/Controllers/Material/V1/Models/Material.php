@@ -17,12 +17,7 @@ class Material extends Moloquent
         '_id' => 'string'
     ];
 
-    public $fillable = [
-        'type',
-        'name',
-    ];
-
-//    protected $guarded = ['_id'];
+    protected $guarded = ['_id'];
 
     public function user()
     {
