@@ -5,7 +5,6 @@ namespace App\Http\Controllers\Material\V1\Api;
 use App\Http\Controllers\Controller;
 use App\Http\Controllers\Material\V1\Models\Material;
 use App\Http\Controllers\Material\V1\Request\MaterialRequest;
-use App\Http\Controllers\Material\V1\Transformer\MaterialTransformer;
 use Illuminate\Http\Request;
 use DB;
 
