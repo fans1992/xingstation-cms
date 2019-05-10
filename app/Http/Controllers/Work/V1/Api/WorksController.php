@@ -72,6 +72,12 @@ class WorksController extends Controller
         return response()->json($work);
     }
 
+    /**
+     * 作品预览
+     * @param Request $request
+     * @param Work $work
+     * @return \Illuminate\Http\JsonResponse
+     */
     public function preview(Request $request, Work $work)
     {
         $work->setAttribute('user', $work->user);
