@@ -73,6 +73,41 @@ class WorksController extends Controller
     }
 
     /**
+     * 作品预览
+     * @param Request $request
+     * @param Work $work
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function preview(Request $request, Work $work)
+    {
+        $work->setAttribute('user', $work->user);
+
+        if ($request->has('workPage')) {
+            $pageId = $request->get('workPage');
+
+            $work = $work->toArray();
+
+            //获取页面组件ids
+            foreach ($work['pages'] as $k => $v) {
+                if ($v['id'] == $pageId) {
+                    $orderIds = $v['order'];
+                } else {
+                    unset($work['pages'][$k]);
+                }
+            }
+
+            //根据ids筛选组件
+            foreach ($work['coms'] as $key => $item) {
+                if (!in_array($item['id'], $orderIds)) {
+                    unset($work['coms'][$key]);
+                }
+            }
+        }
+
+        return response()->json($work);
+    }
+
+    /**
      * 删除作品
      * @param Work $work
      * @return \Dingo\Api\Http\Response

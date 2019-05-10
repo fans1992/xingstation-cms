@@ -31,6 +31,8 @@ $api->version('v1', [
 
         });
 
+        $api->get('/works/preview/{work}', 'WorksController@preview');
+
     });
 
 });
