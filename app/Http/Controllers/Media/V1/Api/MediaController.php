@@ -13,10 +13,15 @@ class MediaController extends Controller
     public function store(Request $request, Media $media)
     {
         $disk = \Storage::disk('qiniu');
+
+        //移动到指定路径
+        $path = $request->get('folder') . '/' .$request->get('key');
+        $disk->move($request->get('key'), $path);
+
         $domain = $disk->getDriver()->downloadUrl();
         $data = [
             'name' => $request->get('name'),
-            'url' => $domain . urlencode($request->get('key')),
+            'url' => $domain . urlencode($path),
             'size' => $request->get('size'),
             'height' => 0,
             'width' => 0,
