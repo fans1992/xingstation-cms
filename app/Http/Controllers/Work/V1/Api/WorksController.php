@@ -80,8 +80,6 @@ class WorksController extends Controller
      */
     public function preview(Request $request, Work $work)
     {
-        $work->setAttribute('user', $work->user);
-
         if ($request->has('workPage')) {
             $pageId = $request->get('workPage');
 
