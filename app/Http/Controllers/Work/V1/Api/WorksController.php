@@ -6,19 +6,16 @@ use App\Http\Controllers\Work\V1\Models\Work;
 use App\Http\Controllers\Work\V1\Request\WorkRequest;
 use App\Http\Controllers\Controller;
 use App\Http\Controllers\Work\V1\Transformer\WorkTransformer;
-use function foo\func;
 use Illuminate\Http\Request;
 
 class WorksController extends Controller
 {
     public function index(Request $request, Work $work)
     {
-        $perPage = $request->perPage ? (int)$request->perPage: 10;
+        $perPage = $request->get('perPage') ? (int)$request->get('perPage') : 10;
 
         $query = $work->query();
-        $works = $query->OrderBy('﻿created_at', 'desc')->paginate($perPage);
-
-        return $this->response->paginator($works, new WorkTransformer());
+        return $query->OrderByDesc('﻿created_at')->paginate($perPage);
     }
 
     public function store(WorkRequest $request, Work $work)
@@ -27,9 +24,17 @@ class WorksController extends Controller
         $work->user_id = $this->user()->id;
         $work->save();
 
-        return $this->response->array($work->toArray())->setStatusCode(201);
+//        return $this->response->array($work->toArray())->setStatusCode(201);
+        return response()->json($work, 201);
     }
 
+    /**
+     * 更新作品
+     * @param WorkRequest $request
+     * @param Work $work
+     * @return Work
+     * @throws \Illuminate\Auth\Access\AuthorizationException
+     */
     public function update(WorkRequest $request, Work $work)
     {
         $this->authorize('own', $work);
@@ -40,32 +45,72 @@ class WorksController extends Controller
 
     public function show(Request $request, Work $work)
     {
-        if ($request->has('workPage')) {
-            $pageId = $request->workPage;
+        $work->setAttribute('user', $work->user);
 
-            $workInfo = $work->toArray();
+        if ($request->has('workPage')) {
+            $pageId = $request->get('workPage');
+
+            $work = $work->toArray();
 
             //获取页面组件ids
-            foreach ($workInfo['pageList'] as $k => $v) {
+            foreach ($work['pages'] as $k => $v) {
                 if ($v['id'] == $pageId) {
                     $orderIds = $v['order'];
                 } else {
-                    unset($workInfo['pageList'][$k]);
+                    unset($work['pages'][$k]);
                 }
             }
 
             //根据ids筛选组件
-            foreach($workInfo['comList'] as $key => $item) {
+            foreach ($work['coms'] as $key => $item) {
                 if (!in_array($item['id'], $orderIds)) {
-                    unset($workInfo['comList'][$key]);
+                    unset($work['coms'][$key]);
+                }
+            }
+        }
+
+        return response()->json($work);
+    }
+
+    /**
+     * 作品预览
+     * @param Request $request
+     * @param Work $work
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function preview(Request $request, Work $work)
+    {
+        if ($request->has('workPage')) {
+            $pageId = $request->get('workPage');
+
+            $work = $work->toArray();
+
+            //获取页面组件ids
+            foreach ($work['pages'] as $k => $v) {
+                if ($v['id'] == $pageId) {
+                    $orderIds = $v['order'];
+                } else {
+                    unset($work['pages'][$k]);
                 }
             }
 
+            //根据ids筛选组件
+            foreach ($work['coms'] as $key => $item) {
+                if (!in_array($item['id'], $orderIds)) {
+                    unset($work['coms'][$key]);
+                }
+            }
         }
 
-        return $this->response->array($workInfo, new WorkTransformer());
+        return response()->json($work);
     }
 
+    /**
+     * 删除作品
+     * @param Work $work
+     * @return \Dingo\Api\Http\Response
+     * @throws \Illuminate\Auth\Access\AuthorizationException
+     */
     public function destroy(Work $work)
     {
         $this->authorize('own', $work);
@@ -76,10 +121,10 @@ class WorksController extends Controller
 
     public function templetIndex(Request $request, Work $work)
     {
-        $perPage = $request->perPage ? (int)$request->perPage: 10;
+        $perPage = $request->perPage ? (int)$request->perPage : 10;
 
         $query = $work->query();
-        $templets = $query->OrderBy('﻿created_at', 'desc')->paginate($perPage);
+        $templets = $query->OrderByDesc('﻿created_at')->paginate($perPage);
 
 //        $templets = $query->user()->whereHas('roles', function (){
 //

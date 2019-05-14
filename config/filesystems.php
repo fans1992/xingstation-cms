@@ -64,6 +64,7 @@ return [
             'url' => env('AWS_URL'),
         ],
 
+
         'qiniu' => [
             'driver' => 'qiniu',
             'domains' => [
@@ -81,7 +82,7 @@ return [
         'qiniu_bw' => [
             'driver' => 'qiniu',
             'domains' => [
-                'default' => 'cdn.exe666.com', //你的七牛域名
+                'default' => 'cdn.xingstation.cn', //你的七牛域名
                 'https' => '',         //你的HTTPS域名
                 'custom' => '',                //你的自定义域名
             ],
@@ -89,9 +90,22 @@ return [
             'secret_key' => 'XDAkO7Gj-JORvuKelsbEF9IZXzYgCTbdWbuBtcah',  //SecretKey
             'bucket' => 'exe666',  //Bucket名字
             'notify_url' => '',  //持久化处理回调地址
-            'url' => 'http://cdn.exe666.com',  // 填写文件访问根url
+            'url' => 'http://cdn.xingstation.cn',  // 填写文件访问根url
         ],
 
+        'qiniu_yq' => [
+            'driver' => 'qiniu',
+            'domains' => [
+                'default' => 'imagecdn.xingstation.com', //你的七牛域名
+                'https' => '',         //你的HTTPS域名
+                'custom' => '',                //你的自定义域名
+            ],
+            'access_key' => '6kYGyUxCsoZV7aY2j57ynx1vCaBO5-KcKQ0JAuR0',  //AccessKey
+            'secret_key' => '8gcw54_KPGfxwXMLrXOcHTUrQhKEL6NPDFp5Pbug',  //SecretKey
+            'bucket' => 'publication',  //Bucket名字
+            'notify_url' => '',  //持久化处理回调地址
+            'url' => 'http://imagecdn.xingstation.com/',  // 填写文件访问根url
+        ],
     ],
 
 ];

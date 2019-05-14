@@ -9,7 +9,7 @@ $api->version('v1', [
         'expires' => config('api.rate_limits.access.expires'),
     ], function ($api) {
 
-        $api->group(['middleware' => "api.auth", 'model' => 'App\Models\User'], function ($api) {
+        $api->group(['middleware' => "api.auth", 'model' => 'App\Models\Customer'], function ($api) {
             $api->put('authorizations/current', 'AuthorizationsController@update');// 刷新token
             $api->delete('authorizations/current', 'AuthorizationsController@destroy');// 删除token
             $api->post('password/reset', 'ResetPasswordController@reset');//修改密码

@@ -14,16 +14,7 @@ class WorkTransformer extends TransformerAbstract
     public function transform(Work $work)
     {
         return [
-            '_id' => $work->_id,
-            'user_id' => $work->user_id,
-            'title' => $work->status['project']['title'],
-            'coverUrl' => $work->status['project']['coverUrl'],
-//            'name' => $work->name,
-//            'status' => $work->﻿status,
-//            'comList' => $work->﻿comList,
-//            'pageList' => $work->﻿pageList,
-//            'created_at' => $work->created_at->toDateTimeString(),
-//            'updated_at' => $work->updated_at->toDateTimeString(),
+            '_id' => $work->_id
         ];
     }
 
