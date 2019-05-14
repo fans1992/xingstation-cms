@@ -15,12 +15,8 @@ class MediaController extends Controller
         $disk = \Storage::disk('qiniu');
 
         //移动到指定路径
-        if ($request->has('folder')) {
-            $path = $request->get('folder') . '/' .$request->get('key');
-            $disk->move($request->get('key'), $path);
-        } else {
-            $path = $request->get('key');
-        }
+        $path = $request->get('folder') . '/' .$request->get('key');
+        $disk->move($request->get('key'), $path);
 
         $domain = $disk->getDriver()->downloadUrl();
         $data = [
