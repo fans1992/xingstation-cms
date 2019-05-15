@@ -12,23 +12,22 @@ $api->version('v1', [
         $api->group(['middleware' => "api.auth", 'model' => 'App\Models\User'], function ($api) {
 
             //作品列表
-            $api->get('works', 'WorksController@index');
+            $api->get('works', ['middleware' => ['permission:cms_work.work.read'], 'uses' => 'WorksController@index']);
 
             //发布作品
-            $api->post('works', 'WorksController@store');
+            $api->post('works', ['middleware' => ['permission:cms_work.work.create'], 'uses' => 'WorksController@store']);
 
             //查看作品
             $api->get('works/{work}', 'WorksController@show');
 
             //修改作品
-            $api->put('works/{work}', 'WorksController@update');
+            $api->put('works/{work}', ['middleware' => ['permission:cms_work.work.update'], 'uses' => 'WorksController@update']);
 
             //删除作品
-            $api->delete('works/{work}', 'WorksController@destroy');
+            $api->delete('works/{work}', ['middleware' => ['permission:cms_work.work.delete'], 'uses' => 'WorksController@destroy']);
 
             //模板列表
-            $api->get('templets/works', 'WorksController@templetIndex');
-
+            $api->get('templets/works', ['middleware' => ['permission:cms_work.work.read'], 'uses' => 'WorksController@templetIndex']);
         });
 
         $api->get('/works/preview/{work}', 'WorksController@preview');
