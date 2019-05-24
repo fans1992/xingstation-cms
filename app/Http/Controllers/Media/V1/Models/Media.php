@@ -2,18 +2,18 @@
 
 namespace App\Http\Controllers\Media\V1\Models;
 
+use App\Http\Controllers\Common\V1\Models\Company;
 use App\Models\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 /**
- * Class Media
+ * App\Http\Controllers\Media\V1\Models\Media
  *
- * @package App\Http\Controllers\Admin\Media\V1\Models
- * @property String $url
  * @property int $id
  * @property string $name
  * @property string|null $type
  * @property int $size
+ * @property string $url
  * @property int|null $company_id
  * @property int|null $contract_id
  * @property int $height
@@ -21,13 +21,14 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  * @property string|null $deleted_at
  * @property \Illuminate\Support\Carbon|null $created_at
  * @property \Illuminate\Support\Carbon|null $updated_at
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Http\Controllers\Common\V1\Models\Company[] $company
  * @method static bool|null forceDelete()
  * @method static \Illuminate\Database\Eloquent\Builder|Media newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|Media newQuery()
  * @method static \Illuminate\Database\Query\Builder|Media onlyTrashed()
- * @method static \Illuminate\Database\Eloquent\Builder|Model ordered()
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Model ordered()
  * @method static \Illuminate\Database\Eloquent\Builder|Media query()
- * @method static \Illuminate\Database\Eloquent\Builder|Model recent()
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Model recent()
  * @method static bool|null restore()
  * @method static \Illuminate\Database\Eloquent\Builder|Media whereCompanyId($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Media whereContractId($value)
@@ -44,7 +45,6 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  * @method static \Illuminate\Database\Query\Builder|Media withTrashed()
  * @method static \Illuminate\Database\Query\Builder|Media withoutTrashed()
  * @mixin \Eloquent
- * @property-read \Illuminate\Database\Eloquent\Collection|\App\Http\Controllers\Admin\Company\V1\Models\Company[] $company
  */
 class Media extends Model
 {

@@ -13,7 +13,7 @@
         "barryvdh/laravel-ide-helper": "^2.4",
         "baum/baum": "^1.1",
         "dingo/api": "2.0.0-alpha2",
-        "doctrine/dbal": "^2.7",
+        "doctrine/dbal": " ~2.3",
         "fideloper/proxy": "^4.0",
         "gregwar/captcha": "^1.1",
         "hashids/hashids": "1.0.0",
