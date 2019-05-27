@@ -11,7 +11,7 @@ $api->version('v1', [
 
         $api->post('captchas', 'CaptchasController@store');// 图片验证码
 
-        $api->group(['middleware' => "api.auth", 'model' => 'App\Models\User'], function ($api) {
+        $api->group(['middleware' => "api.auth", 'model' => 'App\Models\Customer'], function ($api) {
 
             $api->get('qiniu_oauth', 'QiniuController@oauth');
 
