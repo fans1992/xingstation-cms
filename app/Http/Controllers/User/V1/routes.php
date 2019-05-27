@@ -10,7 +10,7 @@ $api->version('v1', [
     ], function ($api) {
         $api->get('user', 'UsersController@me');
 
-        $api->group(['middleware' => "api.auth", 'model' => 'App\Models\User'], function ($api) {
+        $api->group(['middleware' => "api.auth", 'model' => 'App\Models\Customer'], function ($api) {
 
             //当前登录用户信息
             $api->get('user', 'UsersController@me');
