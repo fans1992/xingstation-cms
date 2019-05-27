@@ -3,9 +3,10 @@
 namespace App\Exceptions;
 
 use Exception;
-use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
-use Symfony\Component\HttpKernel\Exception\HttpException;
 use Illuminate\Auth\AuthenticationException;
+use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
+use Illuminate\Support\Facades\URL;
+use Symfony\Component\HttpKernel\Exception\HttpException;
 
 
 class Handler extends ExceptionHandler
@@ -39,27 +40,21 @@ class Handler extends ExceptionHandler
     /**
      * Report or log an exception.
      *
-     * @param  \Exception $exception
-     * @return void
+     * @param Exception $exception
+     * @return mixed
+     * @throws Exception
      */
     public function report(Exception $exception)
     {
-
         if ($this->shouldReport($exception) && env('APP_ENV') == 'production') {
+            $str = $exception->getMessage() . PHP_EOL . $exception->getFile() . PHP_EOL . $exception->getLine();
+            if (request() && request()->route()) {
+                $route = request()->route();
+                $str .= "\n" . "完整URL: " . URL::current()
+                    . "\n" . "请求方式: " . ($route->methods ? implode(',', $route->methods ?? []) : "");
 
-            $official_account = app('wechat.official_account');
-            $official_account->template_message->send([
-                'touser' => 'oNN6q0pq-f0-Z2E2gb0QeOmY4r-M',
-                'template_id' => 'tEaeatGQCZ7tanD4JuFIoddvw8dgWMAYmQcYkjrGWfs',
-                'data' => [
-                    'first' => '服务器出错，请尽快修复',
-                    'keyword1' => request()->url(),
-                    'keyword2' => $exception->getFile(),
-                    'keyword3' => $exception->getLine(),
-                    'keyword4' => date('Y-m-d H:i:s'),
-                    'remark' => $exception->getMessage(),
-                ]
-            ]);
+            }
+//            ding()->with('other')->text($str);
         }
 
         return parent::report($exception);
@@ -68,9 +63,10 @@ class Handler extends ExceptionHandler
     /**
      * Render an exception into an HTTP response.
      *
-     * @param  \Illuminate\Http\Request $request
-     * @param  \Exception $exception
-     * @return \Illuminate\Http\Response
+     * @param \Illuminate\Http\Request $request
+     * @param Exception $exception
+     * @return \Illuminate\Http\Response|\Symfony\Component\HttpFoundation\Response
+     * @throws AuthenticationException
      */
     public function render($request, Exception $exception)
     {
@@ -86,10 +82,6 @@ class Handler extends ExceptionHandler
             return response()->json(['error' => 'Unauthenticated.'], 401);
         }
 
-        $route = $request->segment(1) === 'admin'
-            ? route('admin.login')
-            : route('front.login');
-
-        return redirect()->guest($route);
+        return redirect()->guest(route('login'));
     }
 }
