@@ -9,7 +9,7 @@ $api->version('v1', [
         'expires' => config('api.rate_limits.access.expires'),
     ], function ($api) {
 
-        $api->group(['middleware' => "api.auth", 'model' => 'App\Models\User'], function ($api) {
+        $api->group(['middleware' => "api.auth", 'model' => 'App\Models\Customer'], function ($api) {
 
             //作品列表
             $api->get('works', ['middleware' => ['permission:cms_work.work.read'], 'uses' => 'WorksController@index']);
@@ -18,7 +18,7 @@ $api->version('v1', [
             $api->post('works', ['middleware' => ['permission:cms_work.work.create'], 'uses' => 'WorksController@store']);
 
             //查看作品
-            $api->get('works/{work}', 'WorksController@show');
+            $api->get('works/{work}', ['middleware' => ['permission:cms_work.work.read'], 'uses' => 'WorksController@show']);
 
             //修改作品
             $api->put('works/{work}', ['middleware' => ['permission:cms_work.work.update'], 'uses' => 'WorksController@update']);

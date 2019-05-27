@@ -9,27 +9,27 @@ $api->version('v1', [
         'expires' => config('api.rate_limits.access.expires'),
     ], function ($api) {
 
-        $api->group(['middleware' => "api.auth", 'model' => 'App\Models\User'], function ($api) {
+        $api->group(['middleware' => "api.auth", 'model' => 'App\Models\Customer'], function ($api) {
 
             //素材列表
-            $api->get('materials', 'MaterialsController@index');
+            $api->get('materials', ['middleware' => ['permission:cms_material.material.read'], 'uses' => 'MaterialsController@index']);
 
             //上传素材
-            $api->post('materials', 'MaterialsController@store');
+            $api->post('materials', ['middleware' => ['permission:cms_material.material.create'], 'uses' => 'MaterialsController@store']);
 
             //查看素材
-            $api->get('materials/{material}', 'MaterialsController@show');
+            $api->get('materials', ['middleware' => ['permission:cms_material.material.read'], 'uses' => 'MaterialsController@show']);
 
             //修改素材
-            $api->put('materials/{material}', 'MaterialsController@update');
+            $api->put('materials/{material}', ['middleware' => ['permission:cms_material.material.update'], 'uses' => 'MaterialsController@update']);
 
             //删除素材
-            $api->delete('materials/{material}', 'MaterialsController@destroy');
+            $api->delete('materials/{material}', ['middleware' => ['permission:cms_material.material.delete'], 'uses' => 'MaterialsController@destroy']);
 
             //我的素材
-            $api->get('users/{user}/materials', 'MaterialsController@userIndex');
-
+            $api->get('users/{user}/materials', ['middleware' => ['permission:cms_material.material.read'], 'uses' => 'MaterialsController@userIndex']);
         });
+
 
     });
 
