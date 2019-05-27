@@ -18,7 +18,7 @@ $api->version('v1', [
             $api->post('materials', ['middleware' => ['permission:cms_material.material.create'], 'uses' => 'MaterialsController@store']);
 
             //查看素材
-            $api->get('materials', ['middleware' => ['permission:cms_material.material.read'], 'uses' => 'MaterialsController@show']);
+            $api->get('materials/{material}', ['middleware' => ['permission:cms_material.material.read'], 'uses' => 'MaterialsController@show']);
 
             //修改素材
             $api->put('materials/{material}', ['middleware' => ['permission:cms_material.material.update'], 'uses' => 'MaterialsController@update']);
