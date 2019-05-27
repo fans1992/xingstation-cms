@@ -1,4 +1,5 @@
 <?php
+
 $api->version('v1', [
     'namespace' => 'App\Http\Controllers\Auth\V1\Api',
     'middleware' => ['serializer:array', 'bindings'] //api返回数据切换. Fractal 组件默认提供  DataArraySerializer ArraySerializer
