@@ -27,7 +27,7 @@ use Tymon\JWTAuth\Contracts\JWTSubject;
  * @property int|null $ar_user_id 星视度用户ID
  * @property string|null $z ar用户标识
  * @property string|null $deleted_at
- * @property-read \App\Http\Controllers\Admin\Company\V1\Models\Company $company
+ * @property-read \App\Http\Controllers\Common\V1\Models\Company $company
  * @property-read \Baum\Extensions\Eloquent\Collection|\App\Http\Controllers\Admin\Privilege\V1\Models\Permission[] $permissions
  * @property-read \Illuminate\Database\Eloquent\Collection|\App\Http\Controllers\Admin\Privilege\V1\Models\Role[] $roles
  * @method static \Illuminate\Database\Eloquent\Builder|Customer newModelQuery()
@@ -70,5 +70,16 @@ class Customer extends Authenticatable implements JWTSubject
     public function getJWTCustomClaims(): array
     {
         return [];
+    }
+
+    public function isAuthorOf($model)
+    {
+        return $this->id === $model->user_id;
+    }
+
+    //CMS管理员
+    public function isAdmin()
+    {
+        return $this->hasRole('cms_admin');
     }
 }

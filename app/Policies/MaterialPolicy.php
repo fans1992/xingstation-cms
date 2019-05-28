@@ -3,15 +3,15 @@
 namespace App\Policies;
 
 use App\Http\Controllers\Material\V1\Models\Material;
-use App\Models\User;
 use Illuminate\Auth\Access\HandlesAuthorization;
+use App\Models\Customer;
 
 class MaterialPolicy
 {
     use HandlesAuthorization;
 
-    public function own(User $user, Material $material)
+    public function own(Customer $customer, Material $material)
     {
-        return $user->isAuthorOf($material) || $user->isAdmin();
+        return $customer->isAuthorOf($material) || $customer->isAdmin();
     }
 }
