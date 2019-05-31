@@ -2,9 +2,9 @@
 
 namespace App\Policies;
 
-use App\Http\Controllers\Work\V1\Models\Work;
-use App\Models\User;
 use Illuminate\Auth\Access\HandlesAuthorization;
+use App\Http\Controllers\Work\V1\Models\Work;
+use App\Models\Customer;
 
 class WorkPolicy
 {
@@ -13,10 +13,10 @@ class WorkPolicy
     /**
      * Create a new policy instance.
      *
-     * @return void
+     * @return bool
      */
-    public function own(User $user, Work $work)
+    public function own(Customer $customer, Work $work)
     {
-        return $user->isAuthorOf($work) || $user->isAdmin();
+        return $customer->isAuthorOf($work) || $customer->isAdmin();
     }
 }

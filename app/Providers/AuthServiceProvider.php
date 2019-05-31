@@ -7,8 +7,6 @@ use App\Http\Controllers\Work\V1\Models\Work;
 use App\Policies\MaterialPolicy;
 use App\Policies\WorkPolicy;
 use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
-use App\Models\User;
-use App\Policies\UserPolicy;
 
 
 class AuthServiceProvider extends ServiceProvider
@@ -19,7 +17,6 @@ class AuthServiceProvider extends ServiceProvider
      * @var array
      */
     protected $policies = [
-        User::class     => UserPolicy::class,
         Material::class => MaterialPolicy::class,
         Work::class     => WorkPolicy::class,
     ];
