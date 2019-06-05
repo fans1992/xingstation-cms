@@ -26,7 +26,7 @@ class UsersController extends Controller
         /** @var Customer $customer */
         $customer = $this->user();
 
-        $attributes = $request->only(['name', 'avatar']);
+        $attributes = $request->only(['name', 'avatar', 'password']);
 
 //        if ($request->avatar_image_id) {
 //            $image = Image::find($request->avatar_image_id);
@@ -34,9 +34,9 @@ class UsersController extends Controller
 //            $attributes['avatar'] = $image->path;
 //        }
 
-//        if ($request->password) {
-//            $attributes['password'] = bcrypt($request->password);
-//        }
+        if ($request->password) {
+            $attributes['password'] = bcrypt($request->password);
+        }
 
         $customer->update($attributes);
 
