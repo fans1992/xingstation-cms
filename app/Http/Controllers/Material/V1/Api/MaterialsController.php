@@ -24,7 +24,7 @@ class MaterialsController extends Controller
             $query->where('name', 'like', '%' . $request->name . '%');
         }
 
-        return $query->orderBy('created_at', 'desc')->paginate($perPage);
+        return $query->orderBy('updated_at', 'desc')->paginate($perPage);
     }
 
     public function store(MaterialRequest $request, Material $material)
