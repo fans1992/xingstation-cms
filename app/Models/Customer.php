@@ -60,7 +60,7 @@ class Customer extends Authenticatable implements JWTSubject
 
     protected $guard_name = 'shop';
 
-    protected $fillable = ['name', 'position', 'phone', 'telephone', 'company_id', 'password','z'];
+    protected $fillable = ['name', 'position', 'phone', 'telephone', 'company_id', 'password','z', 'avatar'];
 
     public function getJWTIdentifier()
     {
