@@ -15,7 +15,7 @@ class WorksController extends Controller
         $perPage = $request->get('perPage') ? (int)$request->get('perPage') : 10;
 
         $query = $work->query();
-        return $query->OrderByDesc('﻿created_at')->paginate($perPage);
+        return $query->OrderByDesc('updated_at')->paginate($perPage);
     }
 
     public function store(WorkRequest $request, Work $work)
@@ -61,12 +61,16 @@ class WorksController extends Controller
                 }
             }
 
+            sort($work['pages']);
+
             //根据ids筛选组件
             foreach ($work['coms'] as $key => $item) {
                 if (!in_array($item['id'], $orderIds)) {
                     unset($work['coms'][$key]);
                 }
             }
+
+            sort($work['coms']);
         }
 
         return response()->json($work);
@@ -93,6 +97,7 @@ class WorksController extends Controller
                     unset($work['pages'][$k]);
                 }
             }
+            sort($work['pages']);
 
             //根据ids筛选组件
             foreach ($work['coms'] as $key => $item) {
@@ -100,7 +105,10 @@ class WorksController extends Controller
                     unset($work['coms'][$key]);
                 }
             }
+
+            sort($work['coms']);
         }
+
 
         return response()->json($work);
     }
