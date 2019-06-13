@@ -15,7 +15,7 @@ class WorksController extends Controller
         $perPage = $request->get('perPage') ? (int)$request->get('perPage') : 10;
 
         $query = $work->query();
-        return $query->OrderByDesc('﻿created_at')->paginate($perPage);
+        return $query->OrderByDesc('updated_at')->paginate($perPage);
     }
 
     public function store(WorkRequest $request, Work $work)
